@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="bs-example" data-example-id="bordered-table">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>爱好</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u:${all}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.username}"></td>
+            <td th:text="${u.password}"></td>
+            <td th:text="${u.age}"></td>
+            <td th:text="${u.gender}"></td>
+            <td th:text="${u.hobby}"></td>
+            <td>
+                <a href="list.html" th:href="@{/delete(id=${u.id})}">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

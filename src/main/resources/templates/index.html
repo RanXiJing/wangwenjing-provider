@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <!-- <script>
+        function findUname(o) {
+            var useranme=$(o).val();
+            $.post("findUserByUsername",{"useranme":useranme},function (data) {
+                if(data=="1"){
+                    $("#btnzhuce").removeAttr("disabled");
+                }else{
+                    $("#mess").html("<font color='red'>请先注册</font>");
+                    ("#btnzhuce").attr({"disabled":"disabled"});
+                }
+            },"json");
+        }
+    </script>-->
+    <script>
+        $(function(){
+            $("input:button").click(function() {
+                var hobby = "";
+                $("input:checkbox[name='hobby']:checked").each(function() {
+                    hobby += $(this).val() + " ";
+                });
+                alert("已选择："+hobby);
+                $('#form1').submit();
+            });
+        })
+    </script>
+</head>
+<body>
+<span th:text="${error}"></span>
+<button type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#addModal" data-whatever="@mdo">注册</button>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">添加用户信息</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form1" action="addUser">
+                    用户名:<br/>
+                        <input type="text" name="username"  id="username"><br/>
+                    密码:<br/>
+                        <input type="password" name="password" id="password"><br/>
+                    年龄:<br/>
+                    <select name="age" id="age">
+                        <option value="20" th:selected="${age=='20'}">20</option>
+                        <option value="21" th:selected="${age=='21'}">21</option>
+                        <option value="23" th:selected="${age=='23'}">23</option>
+                        <option value="24" th:selected="${age=='24'}">24</option>
+                        <option value="25" th:selected="${age=='25'}">25</option>
+                        <option value="26" th:selected="${age=='26'}">26</option>
+                    </select><br/>
+                    性别:<br/>
+                    <input type="radio" name="gender" th:value="男" checked="checked">男
+                    <input type="radio" name="gender" th:value="女"> 女<br/>
+                    爱好：<br/>
+                    <div>
+                        <input type="checkbox" name="hobby" th:value="跑步"/><span>跑步</span>
+                        <input type="checkbox" name="hobby" th:value="看电影"/><span>看电影</span>
+                        <input type="checkbox" name="hobby" th:value="看书"/><span>看书</span>
+                        <input type="checkbox" name="hobby" th:value="打球"/><span>打球</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="button" class="btn btn-primary" value="保存">保存</input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<form class="form-inline" action="login" method="post">
+    <div class="form-group">
+        <label for="username">userName</label>
+        <input type="text" name="username" class="form-control" placeholder="ranxi" onblur=" findUname(this);">
+        <span id="mess"></span>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="123">
+    </div>
+    <button type="submit" class="btn btn-default" id="btnzhuce">Login</button>
+</form>
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
